@@ -1,0 +1,14 @@
+{
+  "pages":[
+    "pages/userRegist/regist",
+    "pages/userLogin/login",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "M短视频",
+    "navigationBarTextStyle":"black"
+  },
+  "debug":true
+}
