@@ -1,7 +1,8 @@
 {
   "pages":[
-    "pages/userRegist/regist",
     "pages/userLogin/login",
+    "pages/mine/mine",
+    "pages/userRegist/regist",
     "pages/logs/logs"
   ],
   "window":{
