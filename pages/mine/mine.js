@@ -33,12 +33,13 @@ Page({
   },
 
   onLoad:function(params){
-    var serverUrl = app.serverUrl;
     var me = this;
     var user = app.userInfo;
     wx.showLoading({
       title :'请等待...',
     });
+    var serverUrl = app.serverUrl;
+    //调用后端
     wx.request({
       url: serverUrl + '/user/query?userId=' + user.id,
       method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
@@ -49,6 +50,17 @@ Page({
         wx.hideLoading();
         if(res.data.status ==200){
           var userInfo = res.data.data;
+          var faceUrl = "../resource/images/noneface.png";
+          if(userInfo.faceImage != null && userInfo.faceImage !=''&&userInfo.faceImage!=undefined){
+            faceUrl = serverUrl + userInfo.faceImage;
+          }
+          me.setData({
+            nickname:userInfo.nickname,
+            faceUrl = faceUrl,
+            fansCounts: userInfo.fansCounts,
+            followCounts: userInfo.followCounts,
+            receiveLikeCounts: userInfo.receiveLikeCounts
+          });
         }
       }
     })
@@ -65,13 +77,11 @@ Page({
     //调用后端
     wx.request({
       url: serverUrl + '/logout?userId='+ user.id,
-      data: {},
       method: 'POST',
       header: {
         'content-type' : 'application/json' //默认值
       }, // 设置请求的 header
       success: function(res){
-        // success
         console.log(res.data);
         //将上方的等待方法出现的图表隐藏
         wx.hideLoading();
