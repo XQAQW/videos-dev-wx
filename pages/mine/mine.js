@@ -139,26 +139,26 @@ Page({
                   title:data.msg
                 });
               }
-              // else if (res.data.status == 502) {
-              //   wx.showToast({
-              //     title: res.data.msg,
-              //     duration: 2000,
-              //     icon: "none",
-              //     success: function () {
-              //       wx.redirectTo({
-              //         url: '../userLogin/login',
-              //       })
-              //     }
-              //   });
+              else if (res.data.status == 502) {
+                wx.showToast({
+                  title: res.data.msg,
+                  duration: 2000,
+                  icon: "none",
+                  success: function () {
+                    wx.redirectTo({
+                      url: '../userLogin/login',
+                    })
+                  }
+                });
   
-              // }
+              }
           }
         })
       }
     })
   },
 
-  uploadVoideo:function(){
+  uploadVideo:function(){
     // this是当前page
     var me = this;
 
@@ -184,6 +184,17 @@ Page({
             title : '视频长度太短，请上传超过1秒的视频...',
             icon:'none',
             duration : 2500
+          })
+        } else {
+          //TODO 打开选择bgm的页面
+          wx.navigateTo({
+            url: '../chooseBgm/chooseBgm?duration=' + duration
+            + "&tmpHeight="+tmpHeight
+            + "&tmpWidth=" + tmpWidth
+            + "&tmpVideoUrl="+ tmpVideoUrl
+            + "&tmpCoverUrl=" + tmpCoverUrl,
+            success: function(res){
+            }
           })
         }
       }
